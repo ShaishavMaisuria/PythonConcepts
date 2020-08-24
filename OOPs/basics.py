@@ -1,8 +1,6 @@
 import pygame
 import random
 #this code used for reference purpose only and that I have learned all this concepts
-from OOPs.blob import Blob
-
 WIDTH = 800
 HEIGHT = 600
 WHITE = (255, 255, 255)
