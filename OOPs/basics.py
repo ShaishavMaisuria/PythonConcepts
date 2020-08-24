@@ -10,33 +10,10 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 STARTING_BLUE_BLOBS = 10 # creating the number of blue blobs
 STARTING_RED_BLOBS = 3# creating the number of red blobs
-class Blob:
-#known as a constructor in object oriented concepts. This method called when an object is created from the class and it allow the class to initialize the attributes of a class
+#The new BlueBlob class, inheriting from Blob is our "child" class, or "subclass." When inheriting from another class, you are inheriting everything, all of the methods, including the special methods. Thus, in this case, we're inheriting everything and changing nothing. We can, however, now add our own methods, or even overwrite methods.
 
-    def __init__(self, color, x_border,y_border):
-        self.x_border=x_border
-        self.y_border=y_border
-        self.x = random.randrange(0, x_border)
-        self.y = random.randrange(0, y_border)
-        self.size = random.randrange(4, 8)
-        self.color = color
-#other  methods that helps us to move shape
-    def move(self):
-        self.move_x = random.randrange(-1, 2)
-        self.move_y = random.randrange(-1, 2)
-        self.x += self.move_x
-        self.y += self.move_y
-
-        if self.x < 0:
-            self.x = 0
-        elif self.x > self.x_border:
-            self.x = self.x_border
-
-        if self.y < 0:
-            self.y = 0
-        elif self.y > self.y_border:
-            self.y = self.y_border
-
+class BlueBlob(Blob):
+    pass
 
 #sets the window size
 game_display = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -58,6 +35,7 @@ def draw_environment(blob_list):
             pygame.draw.circle(game_display, blob.color, [blob.x, blob.y], blob.size)
             # moving the shape in short moving the object or changig the posiiont of the object
             blob.move()
+            blob.check_bounds()
 #refressing each of the movements after drawimg
     pygame.display.update()
 
@@ -65,9 +43,8 @@ def draw_environment(blob_list):
 def main():
     #creating the enumerate is used as a iterator to keep track of th each and every object associated with id or  value of counter
 
-    blue_blobs = dict(enumerate([Blob(BLUE,WIDTH,HEIGHT) for i in range(STARTING_BLUE_BLOBS)]))
-    red_blobs = dict(enumerate([Blob(RED,WIDTH,HEIGHT) for i in range(STARTING_RED_BLOBS)]))
-
+    blue_blobs = dict(enumerate([BlueBlob(BLUE, WIDTH, HEIGHT) for i in range(STARTING_BLUE_BLOBS)]))
+    red_blobs = dict(enumerate([BlueBlob(RED, WIDTH, HEIGHT) for i in range(STARTING_RED_BLOBS)]))
 
     #we keep  checking if the player has selected quit or not
     while True:
